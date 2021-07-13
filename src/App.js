@@ -1,36 +1,50 @@
-import React, { useReducer } from 'react';
+import React, { useState, useReducer } from 'react';
 
 const initialState = {
-	counter: 0,
+	toDos: [],
 };
 
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
+const ADD = 'add';
+const DEL = 'del';
 const reducer = (state, action) => {
 	switch (action.type) {
-		case INCREMENT:
-			return { counter: state.counter + 1 };
-		case DECREMENT:
-			return { counter: state.counter - 1 };
+		case ADD:
+			// console.log(state);
+			return { toDos: [...state.toDos, { text: action.payload }] };
 		default:
 			return;
 	}
 };
+
 const App = () => {
+	const [value, setValue] = useState('');
 	const [state, dispatch] = useReducer(reducer, initialState);
-	const handleIncrement = (e) => {
-		e.preventDefault();
-		dispatch({ type: INCREMENT });
+
+	const onChange = (e) => {
+		const value = e.target.value;
+		setValue(value);
 	};
-	const handleDecrement = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch({ type: DECREMENT });
+		// console.log('submit');
+		dispatch({ type: ADD, payload: value });
+		setValue('');
 	};
 	return (
 		<div>
-			<h1>{state.counter}</h1>
-			<button onClick={handleIncrement}>+</button>
-			<button onClick={handleDecrement}>-</button>
+			<h1>Title</h1>
+			<form onSubmit={handleSubmit}>
+				<input type="text" value={value} onChange={onChange} />
+			</form>
+			<section>
+				<h2>list</h2>
+				<ul>
+					{state.toDos.map((item) => (
+						<li key={item.text}>{item.text}</li>
+					))}
+				</ul>
+				<p>{JSON.stringify(state.toDos)}</p>
+			</section>
 		</div>
 	);
 };
