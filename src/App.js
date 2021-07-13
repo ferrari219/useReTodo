@@ -10,7 +10,18 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case ADD:
 			// console.log(state);
-			return { toDos: [...state.toDos, { text: action.payload }] };
+			// console.log(Date.now());
+			return {
+				toDos: [
+					...state.toDos,
+					{ text: action.payload, id: Date.now() },
+				],
+			};
+		case DEL:
+			// console.log(state);
+			return {
+				toDos: state.toDos.filter((item) => item.id !== action.payload),
+			};
 		default:
 			return;
 	}
@@ -30,6 +41,9 @@ const App = () => {
 		dispatch({ type: ADD, payload: value });
 		setValue('');
 	};
+	const handleDelete = (id) => {
+		dispatch({ type: DEL, payload: id });
+	};
 	return (
 		<div>
 			<h1>Title</h1>
@@ -40,7 +54,12 @@ const App = () => {
 				<h2>list</h2>
 				<ul>
 					{state.toDos.map((item) => (
-						<li key={item.text}>{item.text}</li>
+						<li key={item.id}>
+							<span>{item.text}</span>
+							<button onClick={() => handleDelete(item.id)}>
+								X
+							</button>
+						</li>
 					))}
 				</ul>
 				<p>{JSON.stringify(state.toDos)}</p>
