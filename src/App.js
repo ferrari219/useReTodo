@@ -1,31 +1,11 @@
 import React, { useState, useReducer } from 'react';
-
-const initialState = {
-	toDos: [],
-};
-
-const ADD = 'add';
-const DEL = 'del';
-const reducer = (state, action) => {
-	switch (action.type) {
-		case ADD:
-			// console.log(state);
-			// console.log(Date.now());
-			return {
-				toDos: [
-					...state.toDos,
-					{ text: action.payload, id: Date.now() },
-				],
-			};
-		case DEL:
-			// console.log(state);
-			return {
-				toDos: state.toDos.filter((item) => item.id !== action.payload),
-			};
-		default:
-			return;
-	}
-};
+import reducer, {
+	initialState,
+	ADD,
+	DEL,
+	COMPLETED,
+	UNCOMPLETED,
+} from './reducer';
 
 const App = () => {
 	const [value, setValue] = useState('');
@@ -44,6 +24,12 @@ const App = () => {
 	const handleDelete = (id) => {
 		dispatch({ type: DEL, payload: id });
 	};
+	const handleComplete = (id) => {
+		dispatch({ type: COMPLETED, payload: id });
+	};
+	const handleUnComplete = (id) => {
+		dispatch({ type: UNCOMPLETED, payload: id });
+	};
 	return (
 		<div>
 			<h1>Title</h1>
@@ -57,12 +43,32 @@ const App = () => {
 						<li key={item.id}>
 							<span>{item.text}</span>
 							<button onClick={() => handleDelete(item.id)}>
-								X
+								❌
+							</button>
+							<button onClick={() => handleComplete(item.id)}>
+								✅
 							</button>
 						</li>
 					))}
 				</ul>
 				<p>{JSON.stringify(state.toDos)}</p>
+			</section>
+			<section>
+				<h2>comp</h2>
+				<ul>
+					{state.completed.map((item) => (
+						<li key={item.id}>
+							<span>{item.text}</span>
+							<button onClick={() => handleDelete(item.id)}>
+								❌
+							</button>
+							<button onClick={() => handleUnComplete(item.id)}>
+								❎
+							</button>
+						</li>
+					))}
+				</ul>
+				<p>{JSON.stringify(state.completed)}</p>
 			</section>
 		</div>
 	);
