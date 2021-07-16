@@ -14,6 +14,10 @@ const reducer = (state, action) => {
 					...state.todos,
 					{ text: action.payload, id: Date.now() },
 				],
+				completed: [
+					...state.completed,
+					{ text: action.payload, id: Date.now() },
+				],
 			};
 		case DEL:
 			return {
