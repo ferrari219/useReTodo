@@ -1,26 +1,26 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import reducer, { initialState } from './reducer';
 
-const todoContext = createContext();
+const TodoContext = createContext();
 
-const todoContextProvider = ({ children }) => {
+const TodoContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	return (
-		<todoContext.Provider value={{ state, dispatch }}>
+		<TodoContext.Provider value={{ state, dispatch }}>
 			{children}
-		</todoContext.Provider>
+		</TodoContext.Provider>
 	);
 };
 
 export const useDispatch = () => {
-	// const context = useContext(todoContext)
-	const { dispatch } = useContext(todoContext);
+	// const context = useContext(TodoContext)
+	const { dispatch } = useContext(TodoContext);
 	return dispatch;
 };
 export const useState = () => {
-	// const context = useContext(todoContext)
-	const { state } = useContext(todoContext);
+	// const context = useContext(TodoContext)
+	const { state } = useContext(TodoContext);
 	return state;
 };
 
-export default todoContextProvider;
+export default TodoContextProvider;
