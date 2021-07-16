@@ -1,12 +1,10 @@
+import { ADD, DEL, COMPLETED, UNCOMPLETED } from './actions';
+
 export const initialState = {
 	toDos: [],
 	completed: [],
 };
 
-export const ADD = 'add';
-export const DEL = 'del';
-export const COMPLETED = 'completed';
-export const UNCOMPLETED = 'uncompleted';
 const reducer = (state, action) => {
 	switch (action.type) {
 		case ADD:
