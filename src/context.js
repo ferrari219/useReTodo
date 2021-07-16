@@ -22,5 +22,15 @@ export const useState = () => {
 	const { state } = useContext(TodoContext);
 	return state;
 };
+// export const useTodos = () => {
+// 	// const context = useContext(TodoContext)
+// 	const { state: toDos } = useContext(TodoContext);
+// 	return toDos;
+// };
+// export const useCompleted = () => {
+// 	// const context = useContext(TodoContext)
+// 	const { state: completed } = useContext(TodoContext);
+// 	return completed;
+// };
 
 export default TodoContextProvider;

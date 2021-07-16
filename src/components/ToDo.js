@@ -13,7 +13,9 @@ const ToDo = ({ id, text, isCompleted }) => {
 		<li key={id}>
 			<span>{text}</span>
 			<button onClick={() => handleDelete(id)}>❌</button>
-			<button onClick={() => handleComplete(id, isCompleted)}>✅</button>
+			<button onClick={() => handleComplete(id, isCompleted)}>
+				{isCompleted ? <span>❎</span> : <span>✅</span>}
+			</button>
 		</li>
 	);
 };

@@ -20,8 +20,11 @@ const App = () => {
 	// 	dispatch({ type: ADD, payload: value });
 	// 	setValue('');
 	// };
-
+	// console.log(useState);
 	const { toDos, completed } = useState();
+	// const toDos = useTodos();
+	// const completed = useCompleted();
+
 	return (
 		<div>
 			<h1>Title</h1>

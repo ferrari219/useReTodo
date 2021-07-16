@@ -1,4 +1,4 @@
-export const ADD = 'ADD';
-export const DEL = 'DEL';
-export const COMPLETED = 'COMPLETED';
-export const UNCOMPLETED = 'UNCOMPLETED';
+export const ADD = 'add';
+export const DEL = 'del';
+export const COMPLETED = 'completed';
+export const UNCOMPLETED = 'uncompleted';
