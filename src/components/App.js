@@ -11,14 +11,24 @@ const App = () => {
 			<Add />
 			<List name="list">
 				{todos.map((item) => (
-					<Todo key={item.id} id={item.id} text={item.text} />
+					<Todo
+						key={item.id}
+						id={item.id}
+						text={item.text}
+						isCompleted={false}
+					/>
 				))}
 
 				<div>{JSON.stringify(todos)}</div>
 			</List>
 			<List name="comp">
 				{completed.map((item) => (
-					<Todo key={item.id} id={item.id} text={item.text} />
+					<Todo
+						key={item.id}
+						id={item.id}
+						text={item.text}
+						isCompleted={true}
+					/>
 				))}
 				<div>{JSON.stringify(completed)}</div>
 			</List>

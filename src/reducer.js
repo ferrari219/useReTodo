@@ -14,20 +14,36 @@ const reducer = (state, action) => {
 					...state.todos,
 					{ text: action.payload, id: Date.now() },
 				],
-				completed: [
-					...state.completed,
-					{ text: action.payload, id: Date.now() },
-				],
 			};
 		case DEL:
 			return {
 				...state,
 				todos: state.todos.filter((item) => item.id !== action.payload),
+				completed: state.completed.filter(
+					(item) => item.id !== action.payload
+				),
 			};
 		case COMPLETED:
-			return;
+			const target = state.todos.find(
+				(item) => item.id === action.payload
+			);
+			console.log(target);
+			return {
+				...state,
+				todos: state.todos.filter((item) => item.id !== action.payload),
+				completed: [...state.completed, { ...target }],
+			};
 		case UNCOMPLETED:
-			return;
+			const unTarget = state.completed.find(
+				(item) => item.id === action.payload
+			);
+			return {
+				...state,
+				completed: state.completed.filter(
+					(item) => item.id !== action.payload
+				),
+				todos: [...state.todos, { ...unTarget }],
+			};
 		default:
 			throw new Error();
 	}
